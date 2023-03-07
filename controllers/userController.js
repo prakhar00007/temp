@@ -10,10 +10,9 @@ import getDataUri from "../utils/dataUri.js"
 import { sendEmail } from "../utils/sendEmail.js";
 import { Stats } from "../models/Stats.js";
 
-export const register=catchAsyncError(async(req,res,next)=>{
-    const { name, email, password } = req.body;
-
-    const file=req.file;
+export const register = catchAsyncError(async (req, res, next) => {
+  const { name, email, password } = req.body;
+  const file = req.file;
 
 
 
@@ -65,15 +64,19 @@ sendToken(res, user, `Welcome Back, ${user.name}`, 200);
 })
 
 
-export const logout=catchAsyncError(async(req,res,next)=>
-{
-  res.status(200).cookie("token",null,
-  {
-    expires: new Date(Date.now())
-  }).json({
-    success: true,
-    message: "Logged Out Successfully",
-  })
+export const logout = catchAsyncError(async (req, res, next) => {
+  res
+    .status(200)
+    .cookie("token", null, {
+      expires: new Date(Date.now()),
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+    })
+    .json({
+      success: true,
+      message: "Logged Out Successfully",
+    });
 });
 
 export const getMyProfile=catchAsyncError(async(req,res,next)=>
