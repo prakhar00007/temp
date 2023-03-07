@@ -30,6 +30,9 @@ nodeCron.schedule("0 0 0 1 * *", async () => {
 // console.log(`Server is working on port:${process.env.PORT} `);
 //   })
 
-app.listen(process.env.PORT || 3000, function(){
-  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+// app.listen(process.env.PORT, function(){
+//   console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+// });
+app.listen(process.env.PORT, () => {
+  console.log(`Server is working on port ${process.env.PORT}`);
 });
