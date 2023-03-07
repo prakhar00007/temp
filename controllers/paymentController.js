@@ -15,17 +15,20 @@ export const buySubscription = catchAsyncError(async (req, res, next) => {
     const plan_id = process.env.PLAN_ID || "plan_LNxjXKxrzLjBoN";
 
     const subscription = await instance.subscriptions.create({
-        plan_id,
-        customer_notify: 1,
-        total_count: 12,
-      });
+      plan_id,
+      customer_notify: 1,
+      total_count: 12,
+    });
 
-user.subscription.id=subscription.id;
-user.subscription.status=subscription.status;
-await user.save();
-res.status(201).json({
-    success: true,
-    subscriptionId:subscription.id,
+    user.subscription.id = subscription.id;
+
+    user.subscription.status = subscription.status;
+  
+    await user.save();
+  
+    res.status(201).json({
+      success: true,
+      subscriptionId: subscription.id,
 });
 });
 
